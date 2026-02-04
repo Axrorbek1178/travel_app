@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:travel_app/widgets/bottom_nav_bar.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
@@ -129,6 +130,14 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             fixedSize: Size(70, 70),
                           ),
                           onPressed: () {
+                            if (currentIndex == items.length - 1) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => BottomNavBar(),
+                                ),
+                              );
+                            }
                             _controller.nextPage(
                               duration: Duration(milliseconds: 500),
                               curve: Curves.easeInOut,
