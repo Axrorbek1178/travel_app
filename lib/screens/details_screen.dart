@@ -9,6 +9,8 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
+  int activeIndex = 0;
+  List menuItems = ["Detail", "Overview", "Review"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -124,7 +126,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 23),
+                      const SizedBox(height: 10),
                       Row(
                         children: [
                           Text(
@@ -146,13 +148,113 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           ),
                         ],
                       ),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: [
+                          SvgPicture.asset("assets/icons/Star.svg"),
+                          const SizedBox(width: 8),
+                          Text(
+                            "4.9",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const SizedBox(width: 20),
+                          Text(
+                            "2w people left footprints  ",
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xffADB4BD),
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
               ),
             ],
           ),
+          const SizedBox(height: 118),
+          SizedBox(
+            height: 40,
+            child: ListView.builder(
+              itemCount: menuItems.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      activeIndex = index;
+                    });
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.only(left: 24),
+                    child: Column(
+                      children: [
+                        Text(
+                          menuItems[index],
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: activeIndex == index
+                                ? Color(0xff163C9F)
+                                : Color(0xffADB4BD),
+                            fontWeight: activeIndex == index
+                                ? FontWeight.bold
+                                : FontWeight.w500,
+                          ),
+                        ),
+
+                        Container(
+                          width: activeIndex == index ? 57 : 0,
+                          height: 2,
+                          color: Color(0xff163C9F),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+          const SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Text(
+              "Sealink Luxury is the most luxurious luxury hotel segment of Capi, located in big...  ",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: Color(0xff828282),
+              ),
+            ),
+          ),
         ],
+      ),
+      bottomSheet: Padding(
+        padding: const EdgeInsets.only(left: 24, right: 24, bottom: 50),
+        child: GestureDetector(
+          onTap: () {},
+          child: Container(
+            alignment: Alignment.center,
+            height: 44,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Color(0xff163C9F),
+            ),
+            child: Text(
+              "Select a room",
+              style: TextStyle(
+                color: Color(0xffF2F2F2),
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
